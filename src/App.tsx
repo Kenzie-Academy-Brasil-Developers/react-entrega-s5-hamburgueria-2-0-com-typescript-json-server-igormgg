@@ -1,12 +1,15 @@
 import "./reset.css";
 import "./App.css";
 import GlobalStyle from "./GlobalStyles";
+import Routes from "./Routes";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <main></main>
+      <main>
+        <Routes />
+      </main>
     </>
   );
 }
