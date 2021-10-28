@@ -1,8 +1,14 @@
 import "./reset.css";
 import "./App.css";
+import GlobalStyle from "./GlobalStyles";
 
 function App() {
-  return <div></div>;
+  return (
+    <>
+      <GlobalStyle />
+      <main></main>
+    </>
+  );
 }
 
 export default App;
