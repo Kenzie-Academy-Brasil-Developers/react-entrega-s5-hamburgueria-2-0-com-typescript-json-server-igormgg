@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useProducts } from "../../Providers/Products";
 import { DashboardContainer } from "./styles";
+import CartModal from "../../Components/CartModal";
 
 interface ProductData {
   userId: number;
@@ -17,6 +18,21 @@ const Dashboard = () => {
     [] as ProductData[]
   );
 
+  const { addToCart, cart, modalOpenClick, setToCart, token } = useProducts();
+
+  useEffect(() => {
+    axios
+      .get("https://hamburgueria-kenzie-2-igor.herokuapp.com/cart", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setToCart(response.data);
+      })
+      .catch((err) => console.log(err));
+  }, [cart]);
+
   useEffect(() => {
     axios
       .get("https://hamburgueria-kenzie-2-igor.herokuapp.com/products")
@@ -26,14 +42,14 @@ const Dashboard = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const { addToCart } = useProducts();
-
   return (
     <DashboardContainer>
+      <CartModal />
+      <button onClick={modalOpenClick}>Carrinho</button>
       <ul>
         {productList.map((item, index) => (
           <li key={index}>
-            {/* <img src={item.image} alt={item.product} /> */}
+            <img src={item.image} alt={item.product} />
             <h1>{item.product}</h1>
             <h2>{item.category}</h2>
             <h3>{item.price}</h3>

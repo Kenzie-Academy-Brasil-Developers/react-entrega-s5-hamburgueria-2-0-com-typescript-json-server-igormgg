@@ -5,8 +5,12 @@ import { toast } from "react-toastify";
 interface ProductsProviderData {
   cart: ProductData[];
   token: string;
+  openModal: boolean;
+  modalCloseClick: (event: any) => void;
+  modalOpenClick: () => void;
   addToCart: (product: ProductData) => void;
   removeFromCart: (product: ProductData) => void;
+  setToCart: (data: ProductData[]) => void;
 }
 
 interface ProductsProps {
@@ -19,7 +23,7 @@ interface ProductData {
   category: string;
   price: number;
   image: string;
-  id: number;
+  id?: number;
 }
 
 const ProductsContext = createContext<ProductsProviderData>(
@@ -29,12 +33,16 @@ const ProductsContext = createContext<ProductsProviderData>(
 export const ProductsProvider = ({ children }: ProductsProps) => {
   const [cart, setCart] = useState<ProductData[]>([] as ProductData[]);
 
+  const [openModal, setOpenModal] = useState(false);
+
   const token = localStorage.getItem("token") || "";
 
   const addToCart = (product: ProductData) => {
+    console.log(token);
+    console.log(cart);
     const newProduct = {
       category: product.category,
-      //   image: product.image,
+      image: product.image,
       price: product.price,
       product: product.product,
       userId: product.userId,
@@ -69,9 +77,32 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
     setCart(newCart);
   };
 
+  const setToCart = (data: ProductData[]) => {
+    setCart(data);
+  };
+
+  const modalOpenClick = () => {
+    setOpenModal(true);
+  };
+
+  const modalCloseClick = (event: any) => {
+    if (event.target.id === "modalContainer") {
+      setOpenModal(false);
+    }
+  };
+
   return (
     <ProductsContext.Provider
-      value={{ addToCart, cart, removeFromCart, token }}
+      value={{
+        addToCart,
+        cart,
+        openModal,
+        modalCloseClick,
+        modalOpenClick,
+        removeFromCart,
+        setToCart,
+        token,
+      }}
     >
       {children}
     </ProductsContext.Provider>
