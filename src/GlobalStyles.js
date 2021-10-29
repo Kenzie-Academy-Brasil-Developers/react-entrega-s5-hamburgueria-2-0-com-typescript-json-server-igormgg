@@ -14,7 +14,9 @@ const GlobalStyle = createGlobalStyle`
     --fb-information: #155BCB;
 }
 
-
+* {
+    font-family: 'Inter', sans-serif;
+}
 
 `;
 
