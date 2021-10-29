@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useProducts } from "../../Providers/Products";
 import { DashboardContainer } from "./styles";
 
 interface ProductData {
@@ -20,11 +21,12 @@ const Dashboard = () => {
     axios
       .get("https://hamburgueria-kenzie-2-igor.herokuapp.com/products")
       .then((response) => {
-        console.log(response);
         setProductList(response.data);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const { addToCart } = useProducts();
 
   return (
     <DashboardContainer>
@@ -35,7 +37,7 @@ const Dashboard = () => {
             <h1>{item.product}</h1>
             <h2>{item.category}</h2>
             <h3>{item.price}</h3>
-            <button>Adicionar</button>
+            <button onClick={() => addToCart(item)}>Adicionar</button>
           </li>
         ))}
       </ul>
