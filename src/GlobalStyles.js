@@ -18,6 +18,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Inter', sans-serif;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 `;
 
 export default GlobalStyle;

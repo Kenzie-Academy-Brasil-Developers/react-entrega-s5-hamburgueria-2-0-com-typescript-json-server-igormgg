@@ -16,8 +16,11 @@ const Home = () => {
   const history = useHistory();
 
   const schema = yup.object().shape({
-    email: yup.string().required("*Digite seu email"),
-    password: yup.string().required("*Digite sua senha"),
+    email: yup
+      .string()
+      .email("Digite um email válido")
+      .required("Digite seu email"),
+    password: yup.string().required("Digite sua senha"),
   });
 
   const {

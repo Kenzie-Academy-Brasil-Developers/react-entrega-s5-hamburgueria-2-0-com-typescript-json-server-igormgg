@@ -1,11 +1,13 @@
 import axios from "axios";
 import { createContext, ReactNode, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface AuthProviderData {
   authToken: string;
   Signout: () => void;
   Signin: (userData: UserData) => void;
+  Register: (registerData: RegisterData) => void;
 }
 
 interface AuthProps {
@@ -17,6 +19,13 @@ interface UserData {
   password: string;
 }
 
+interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+  confirmPass: string;
+}
+
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProps) => {
@@ -26,6 +35,19 @@ export const AuthProvider = ({ children }: AuthProps) => {
     () => localStorage.getItem("token") || ""
   );
 
+  const Register = (registerData: RegisterData) => {
+    axios
+      .post(
+        "https://hamburgueria-kenzie-2-igor.herokuapp.com/register",
+        registerData
+      )
+      .then((response) => {
+        toast.success("Cadastro realizado!");
+        history.push("/login");
+      })
+      .catch(() => toast.error("Ops, algo deu errado!"));
+  };
+
   const Signin = (userData: UserData) => {
     axios
       .post("https://hamburgueria-kenzie-2-igor.herokuapp.com/login", userData)
@@ -33,8 +55,9 @@ export const AuthProvider = ({ children }: AuthProps) => {
         localStorage.setItem("token", response.data.accessToken);
         setAuthToken(response.data.accessToken);
         history.push("/dashboard");
+        toast.success(`Bem vindo ${response.data.user.name}!`);
       })
-      .catch((err) => console.log(err));
+      .catch(() => toast.error("Ops, algo deu errado!"));
   };
 
   const Signout = () => {
@@ -44,7 +67,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ authToken, Signout, Signin }}>
+    <AuthContext.Provider value={{ authToken, Signout, Signin, Register }}>
       {children}
     </AuthContext.Provider>
   );
