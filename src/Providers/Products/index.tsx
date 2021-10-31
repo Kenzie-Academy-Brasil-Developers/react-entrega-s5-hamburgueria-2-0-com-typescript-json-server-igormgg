@@ -6,11 +6,13 @@ interface ProductsProviderData {
   cart: ProductData[];
   token: string;
   openModal: boolean;
+  productList: ProductData[];
   modalCloseClick: (event: any) => void;
   modalOpenClick: () => void;
   addToCart: (product: ProductData) => void;
   removeFromCart: (product: ProductData) => void;
   setToCart: (data: ProductData[]) => void;
+  setProducts: (item: ProductData[]) => void;
 }
 
 interface ProductsProps {
@@ -33,13 +35,20 @@ const ProductsContext = createContext<ProductsProviderData>(
 export const ProductsProvider = ({ children }: ProductsProps) => {
   const [cart, setCart] = useState<ProductData[]>([] as ProductData[]);
 
+  const [productList, setProductList] = useState<ProductData[]>(
+    [] as ProductData[]
+  );
+
   const [openModal, setOpenModal] = useState(false);
 
   const token = localStorage.getItem("token") || "";
 
+  const setProducts = (item: ProductData[]) => {
+    setProductList(item);
+  };
+
   const addToCart = (product: ProductData) => {
     console.log(token);
-    console.log(cart);
     const newProduct = {
       category: product.category,
       image: product.image,
@@ -99,6 +108,8 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
         openModal,
         modalCloseClick,
         modalOpenClick,
+        productList,
+        setProducts,
         removeFromCart,
         setToCart,
         token,

@@ -1,24 +1,41 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useProducts } from "../../Providers/Products";
 import { DashboardContainer } from "./styles";
 import CartModal from "../../Components/CartModal";
+import Header from "../../Components/Header";
 
-interface ProductData {
-  userId: number;
-  product: string;
-  category: string;
-  price: number;
-  image: string;
-  id: number;
-}
+// interface ProductData {
+//   userId: number;
+//   product: string;
+//   category: string;
+//   price: number;
+//   image: string;
+//   id: number;
+// }
+
+// interface setProductsData {
+//   setProducts: (item: ProductData[]) => void
+// }
 
 const Dashboard = () => {
-  const [productList, setProductList] = useState<ProductData[]>(
-    [] as ProductData[]
-  );
+  // const [productList, setProductList] = useState<ProductData[]>(
+  //   [] as ProductData[]
+  // );
 
-  const { addToCart, cart, modalOpenClick, setToCart, token } = useProducts();
+  const {
+    addToCart,
+    cart,
+    modalOpenClick,
+    productList,
+    setProducts,
+    setToCart,
+    token,
+  } = useProducts();
+
+  // const setProducts = (item: ProductData[]) => {
+  //   setProductList(item);
+  // };
 
   useEffect(() => {
     axios
@@ -37,7 +54,7 @@ const Dashboard = () => {
     axios
       .get("https://hamburgueria-kenzie-2-igor.herokuapp.com/products")
       .then((response) => {
-        setProductList(response.data);
+        setProducts(response.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -45,6 +62,7 @@ const Dashboard = () => {
   return (
     <DashboardContainer>
       <CartModal />
+      <Header />
       <button onClick={modalOpenClick}>Carrinho</button>
       <ul>
         {productList.map((item, index) => (
