@@ -1,8 +1,17 @@
 import { ModalContainer } from "./styles";
 import { useProducts } from "../../Providers/Products";
 
+// interface finalPriceData {
+//   finalPrice: () => Number
+// }
+
 const CartModal = () => {
   const { cart, modalCloseClick, openModal, removeFromCart } = useProducts();
+
+  // const finalPrice = cart.reduce((acc, item) => {
+  //   let output = acc + Number(item.price)
+
+  // })
 
   return (
     <>
@@ -30,6 +39,12 @@ const CartModal = () => {
                   </li>
                 ))}
               </ul>
+              <div>
+                <p>Total</p>
+                <span>
+                  R$ {cart.reduce((acc, item) => acc + item.price, 0)},00
+                </span>
+              </div>
             </div>
           )}
         </ModalContainer>

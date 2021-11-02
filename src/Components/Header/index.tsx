@@ -5,14 +5,14 @@ import { FiLogOut } from "react-icons/fi";
 import { useState } from "react";
 import { useProducts } from "../../Providers/Products";
 
-interface ProductData {
-  userId: number;
-  product: string;
-  category: string;
-  price: number;
-  image: string;
-  id: number;
-}
+// interface ProductData {
+//   userId: number;
+//   product: string;
+//   category: string;
+//   price: number;
+//   image: string;
+//   id: number;
+// }
 
 const Header = () => {
   const [inputText, setInputText] = useState("");

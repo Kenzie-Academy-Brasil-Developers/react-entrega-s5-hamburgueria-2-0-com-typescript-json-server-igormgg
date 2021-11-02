@@ -4,6 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
+import { FiShoppingBag } from "react-icons/fi";
+// import { useState } from "react";
 
 interface UserData {
   email: string;
@@ -11,6 +13,8 @@ interface UserData {
 }
 
 const Home = () => {
+  // const [emailInputColor, setEmailInputColor] = useState("var(--gray-600)");
+
   const { Signin } = useAuth();
 
   const history = useHistory();
@@ -33,28 +37,76 @@ const Home = () => {
     Signin(data);
   };
 
+  // errors.email === undefined
+  //   ? setEmailInputColor("var(--gray-600)")
+  //   : setEmailInputColor("var(--fb-negative)");
+
   return (
     <LoginContainer>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Login</h1>
         <div>
-          <input type="text" {...register("email")} placeholder="Seu email" />
+          <input
+            id="emailInput"
+            type="text"
+            {...register("email")}
+            placeholder="Email"
+          />
           <label>{errors.email?.message}</label>
         </div>
         <div>
           <input
             type="password"
             {...register("password")}
-            placeholder="Sua senha"
+            placeholder="Senha"
           />
           <label>{errors.password?.message}</label>
         </div>
-        <button type="submit">Logar</button>
+        <button id="loginButton" type="submit">
+          Logar
+        </button>
         <span>
           Crie sua conta para saborear muitas delícias e matar sua fome!
         </span>
-        <button onClick={() => history.push("/register")}>Cadastrar</button>
+        <button id="registerButton" onClick={() => history.push("/register")}>
+          Cadastrar
+        </button>
       </form>
+      <div id="logoContainer">
+        <img
+          src="https://i.ibb.co/ct7G91Q/burguer-logo.png"
+          alt="Burguer Logo"
+        />
+        <div id="logoDescriptionDiv">
+          <div id="iconDiv">
+            <FiShoppingBag />
+          </div>
+          <span>
+            A vida é como um sanduíche, é preciso recheá-la com os{" "}
+            <b>melhores</b> ingredientes.
+          </span>
+        </div>
+        <div id="logoDots">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
     </LoginContainer>
   );
 };
