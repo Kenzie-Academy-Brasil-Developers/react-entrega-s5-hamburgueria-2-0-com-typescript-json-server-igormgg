@@ -4,20 +4,14 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { useState } from "react";
 import { useProducts } from "../../Providers/Products";
-
-// interface ProductData {
-//   userId: number;
-//   product: string;
-//   category: string;
-//   price: number;
-//   image: string;
-//   id: number;
-// }
+import { useAuth } from "../../Providers/Auth";
 
 const Header = () => {
   const [inputText, setInputText] = useState("");
 
-  const { setProducts, productList } = useProducts();
+  const { modalOpenClick, setProducts, productList } = useProducts();
+
+  const { Signout } = useAuth();
 
   const filter = productList.filter(
     (element) =>
@@ -32,21 +26,25 @@ const Header = () => {
   return (
     <HeaderContainer>
       <div id="logo">
-        <h1>Burguer</h1>
-        <span>Kenzie</span>
+        <img
+          src="https://i.ibb.co/ct7G91Q/burguer-logo.png"
+          alt="Burguer Logo"
+        />
       </div>
       <div id="endBox">
-        <input
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          type="text"
-          placeholder="Digitar Pesquisa"
-        />
-        <div id="searchIconDiv">
-          <BiSearch onClick={handleSearchClick} />
+        <div id="searchBox">
+          <input
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            type="text"
+            placeholder="Digitar Pesquisa"
+          />
+          <div id="searchIconDiv">
+            <BiSearch onClick={handleSearchClick} />
+          </div>
         </div>
-        <FaShoppingCart />
-        <FiLogOut />
+        <FaShoppingCart id="cartSVG" onClick={modalOpenClick} />
+        <FiLogOut id="logoutSVG" onClick={Signout} />
       </div>
     </HeaderContainer>
   );

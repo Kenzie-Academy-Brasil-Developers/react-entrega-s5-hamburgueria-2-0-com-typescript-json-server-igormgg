@@ -48,7 +48,8 @@ const Home = () => {
         <div>
           <input
             id="emailInput"
-            type="text"
+            type="email"
+            required={errors.email ? true : false}
             {...register("email")}
             placeholder="Email"
           />
@@ -57,6 +58,7 @@ const Home = () => {
         <div>
           <input
             type="password"
+            required={errors.password ? true : false}
             {...register("password")}
             placeholder="Senha"
           />

@@ -39,8 +39,22 @@ export const LoginContainer = styled.div`
       input {
         height: 60px;
         font-size: 16px;
+        border: none;
         border-radius: 8px;
         padding: 0 15px 0 15px;
+        color: var(--gray-600);
+        background-color: var(--gray-0);
+        outline: none;
+
+        :focus {
+          border: 2px solid var(--fb-success);
+          background-color: white;
+        }
+
+        :required {
+          border: 2px solid var(--fb-negative);
+          background-color: white;
+        }
       }
 
       /* #emailInput {

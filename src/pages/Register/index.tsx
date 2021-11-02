@@ -3,6 +3,8 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../Providers/Auth";
 import { RegisterContainer } from "./styles";
+import { useHistory } from "react-router";
+import { FiShoppingBag } from "react-icons/fi";
 
 interface RegisterData {
   name: string;
@@ -13,6 +15,8 @@ interface RegisterData {
 
 const Register = () => {
   const { Register } = useAuth();
+
+  const history = useHistory();
 
   const schema = yup.object().shape({
     name: yup.string().required("Digite seu nome"),
@@ -43,33 +47,87 @@ const Register = () => {
   return (
     <RegisterContainer>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h1>Cadastro</h1>
-        <div>
-          <input type="text" {...register("name")} placeholder="Seu nome" />
+        <div id="registerHeader">
+          <h1>Cadastro</h1>
+          <button type="button" onClick={() => history.push("/")}>
+            Retornar para o login
+          </button>
+        </div>
+        <div className="commonInputDiv">
+          <input
+            type="text"
+            required={errors.name ? true : false}
+            {...register("name")}
+            placeholder="Nome"
+          />
           <label>{errors.name?.message}</label>
         </div>
-        <div>
-          <input type="text" {...register("email")} placeholder="Seu email" />
+        <div className="commonInputDiv">
+          <input
+            type="email"
+            required={errors.email ? true : false}
+            {...register("email")}
+            placeholder="Email"
+          />
           <label>{errors.email?.message}</label>
         </div>
-        <div>
+        <div className="commonInputDiv">
           <input
             type="password"
+            required={errors.password ? true : false}
             {...register("password")}
             placeholder="Senha"
           />
           <label>{errors.password?.message}</label>
         </div>
-        <div>
+        <div className="commonInputDiv">
           <input
             type="password"
+            required={errors.confirmPass ? true : false}
             {...register("confirmPass")}
             placeholder="Confirmar senha"
           />
           <label>{errors.confirmPass?.message}</label>
         </div>
-        <button type="submit">Cadastrar</button>
+        <button id="registerButton" type="submit">
+          Cadastrar
+        </button>
       </form>
+      <div id="logoContainer">
+        <img
+          src="https://i.ibb.co/ct7G91Q/burguer-logo.png"
+          alt="Burguer Logo"
+        />
+        <div id="logoDescriptionDiv">
+          <div id="iconDiv">
+            <FiShoppingBag />
+          </div>
+          <span>
+            A vida é como um sanduíche, é preciso recheá-la com os{" "}
+            <b>melhores</b> ingredientes.
+          </span>
+        </div>
+        <div id="logoDots">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
     </RegisterContainer>
   );
 };
