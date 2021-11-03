@@ -23,8 +23,15 @@ const Dashboard = () => {
   //   [] as ProductData[]
   // );
 
-  const { addToCart, cart, productList, setProducts, setToCart, token } =
-    useProducts();
+  const {
+    addToCart,
+    cart,
+    // productList,
+    searchFilter,
+    setProducts,
+    setToCart,
+    token,
+  } = useProducts();
 
   // const setProducts = (item: ProductData[]) => {
   //   setProductList(item);
@@ -58,19 +65,24 @@ const Dashboard = () => {
       <DashboardContainer>
         <CartModal />
         <ul id="productListContainer">
-          {productList.map((item, index) => (
-            <li key={index}>
-              <div id="imgDiv">
-                <img src={item.image} alt={item.product} />
-              </div>
-              <div id="ProductDescriptionDiv">
-                <h1>{item.product}</h1>
-                <h2>{item.category}</h2>
-                <h3>R$ {item.price}.00</h3>
-                <button onClick={() => addToCart(item)}>Adicionar</button>
-              </div>
-            </li>
-          ))}
+          {/* {productList.map((item, index) => ( */}
+          {searchFilter.length !== 0 ? (
+            searchFilter.map((item, index) => (
+              <li key={index}>
+                <div id="imgDiv">
+                  <img src={item.image} alt={item.product} />
+                </div>
+                <div id="ProductDescriptionDiv">
+                  <h1>{item.product}</h1>
+                  <h2>{item.category}</h2>
+                  <h3>R$ {item.price}.00</h3>
+                  <button onClick={() => addToCart(item)}>Adicionar</button>
+                </div>
+              </li>
+            ))
+          ) : (
+            <h5>Não há produtos correspondentes com sua pesquisa</h5>
+          )}
         </ul>
       </DashboardContainer>
     </>

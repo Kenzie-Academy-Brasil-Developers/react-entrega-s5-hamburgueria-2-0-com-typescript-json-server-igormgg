@@ -7,6 +7,8 @@ interface ProductsProviderData {
   token: string;
   openModal: boolean;
   productList: ProductData[];
+  searchFilter: ProductData[];
+  searchInput: string;
   modalClose: () => void;
   modalCloseClick: (event: any) => void;
   modalOpenClick: () => void;
@@ -14,6 +16,7 @@ interface ProductsProviderData {
   removeFromCart: (product: ProductData) => void;
   setToCart: (data: ProductData[]) => void;
   setProducts: (item: ProductData[]) => void;
+  writeSearchInput: (str: string) => void;
 }
 
 interface ProductsProps {
@@ -41,6 +44,18 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
   );
 
   const [openModal, setOpenModal] = useState(false);
+
+  const [searchInput, setSearchInput] = useState("");
+
+  const searchFilter = productList.filter(
+    (element) =>
+      element.product.toLowerCase().includes(searchInput) ||
+      element.category.toLowerCase().includes(searchInput)
+  );
+
+  const writeSearchInput = (str: string) => {
+    setSearchInput(str);
+  };
 
   const token = localStorage.getItem("token") || "";
 
@@ -115,10 +130,13 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
         modalCloseClick,
         modalOpenClick,
         productList,
+        searchInput,
         setProducts,
+        searchFilter,
         removeFromCart,
         setToCart,
         token,
+        writeSearchInput,
       }}
     >
       {children}

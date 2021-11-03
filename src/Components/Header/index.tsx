@@ -2,25 +2,35 @@ import { HeaderContainer } from "./styles";
 import { BiSearch } from "react-icons/bi";
 import { FaShoppingCart } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
-import { useState } from "react";
+// import { useState } from "react";
 import { useProducts } from "../../Providers/Products";
 import { useAuth } from "../../Providers/Auth";
 
 const Header = () => {
-  const [inputText, setInputText] = useState("");
+  // const [inputText, setInputText] = useState("");
 
-  const { modalOpenClick, setProducts, productList } = useProducts();
+  const {
+    modalOpenClick,
+    searchInput,
+    writeSearchInput,
+    // setProducts,
+    // productList,
+  } = useProducts();
 
   const { Signout } = useAuth();
 
-  const filter = productList.filter(
-    (element) =>
-      element.product.toLowerCase().includes(inputText) ||
-      element.category.toLowerCase().includes(inputText)
-  );
+  // const filter = productList.filter(
+  //   (element) =>
+  //     element.product.toLowerCase().includes(inputText) ||
+  //     element.category.toLowerCase().includes(inputText)
+  // );
+
+  // const handleSearchClick = () => {
+  //   setProducts(filter);
+  // };
 
   const handleSearchClick = () => {
-    setProducts(filter);
+    console.log("Reestruturar");
   };
 
   return (
@@ -34,8 +44,10 @@ const Header = () => {
       <div id="endBox">
         <div id="searchBox">
           <input
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
+            // value={inputText}
+            value={searchInput}
+            // onChange={(e) => setInputText(e.target.value)}
+            onChange={(e) => writeSearchInput(e.target.value)}
             type="text"
             placeholder="Digitar Pesquisa"
           />
