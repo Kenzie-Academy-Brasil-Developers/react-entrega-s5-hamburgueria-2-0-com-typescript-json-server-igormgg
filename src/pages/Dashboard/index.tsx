@@ -23,15 +23,8 @@ const Dashboard = () => {
   //   [] as ProductData[]
   // );
 
-  const {
-    addToCart,
-    cart,
-    modalOpenClick,
-    productList,
-    setProducts,
-    setToCart,
-    token,
-  } = useProducts();
+  const { addToCart, cart, productList, setProducts, setToCart, token } =
+    useProducts();
 
   // const setProducts = (item: ProductData[]) => {
   //   setProductList(item);
@@ -60,22 +53,27 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <DashboardContainer>
-      <CartModal />
+    <>
       <Header />
-      <button onClick={modalOpenClick}>Carrinho</button>
-      <ul>
-        {productList.map((item, index) => (
-          <li key={index}>
-            <img src={item.image} alt={item.product} />
-            <h1>{item.product}</h1>
-            <h2>{item.category}</h2>
-            <h3>{item.price}</h3>
-            <button onClick={() => addToCart(item)}>Adicionar</button>
-          </li>
-        ))}
-      </ul>
-    </DashboardContainer>
+      <DashboardContainer>
+        <CartModal />
+        <ul id="productListContainer">
+          {productList.map((item, index) => (
+            <li key={index}>
+              <div id="imgDiv">
+                <img src={item.image} alt={item.product} />
+              </div>
+              <div id="ProductDescriptionDiv">
+                <h1>{item.product}</h1>
+                <h2>{item.category}</h2>
+                <h3>R$ {item.price}.00</h3>
+                <button onClick={() => addToCart(item)}>Adicionar</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </DashboardContainer>
+    </>
   );
 };
 

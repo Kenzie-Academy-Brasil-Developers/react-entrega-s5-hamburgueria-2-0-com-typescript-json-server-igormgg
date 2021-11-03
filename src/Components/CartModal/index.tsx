@@ -18,7 +18,7 @@ const CartModal = () => {
       {openModal && (
         <ModalContainer onClick={modalCloseClick} id="modalContainer">
           {cart.length === 0 ? (
-            <div id="modalDiv">
+            <div id="emptyModalDiv">
               <h1>Não há produtos no carrinho</h1>
             </div>
           ) : (
