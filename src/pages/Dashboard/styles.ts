@@ -11,6 +11,7 @@ export const DashboardContainer = styled.div`
     gap: 70px;
 
     li {
+      min-width: 300px;
       width: 300px;
       height: 346px;
       border: 2px solid var(--gray-100);
@@ -59,6 +60,18 @@ export const DashboardContainer = styled.div`
           }
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    padding: 20px 10px 0 10px;
+
+    #productListContainer {
+      width: 100%;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      justify-content: unset;
+      gap: 20px;
     }
   }
 `;
