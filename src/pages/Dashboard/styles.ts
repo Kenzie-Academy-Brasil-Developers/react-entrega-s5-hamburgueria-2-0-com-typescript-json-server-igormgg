@@ -49,10 +49,14 @@ export const DashboardContainer = styled.div`
         button {
           width: 106px;
           height: 40px;
-          border: 2px solid #bdbdbd;
+          border: none;
           border-radius: 8px;
           background-color: #bdbdbd;
           color: #ffffff;
+
+          :hover {
+            background-color: var(--gray-300);
+          }
         }
       }
     }

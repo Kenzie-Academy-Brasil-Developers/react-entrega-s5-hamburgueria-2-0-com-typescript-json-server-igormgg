@@ -7,6 +7,7 @@ interface ProductsProviderData {
   token: string;
   openModal: boolean;
   productList: ProductData[];
+  modalClose: () => void;
   modalCloseClick: (event: any) => void;
   modalOpenClick: () => void;
   addToCart: (product: ProductData) => void;
@@ -100,12 +101,17 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
     }
   };
 
+  const modalClose = () => {
+    setOpenModal(false);
+  };
+
   return (
     <ProductsContext.Provider
       value={{
         addToCart,
         cart,
         openModal,
+        modalClose,
         modalCloseClick,
         modalOpenClick,
         productList,

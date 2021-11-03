@@ -1,12 +1,15 @@
 import { ModalContainer } from "./styles";
 import { useProducts } from "../../Providers/Products";
+import { AiOutlineClose } from "react-icons/ai";
+import { FaTrash } from "react-icons/fa";
 
 // interface finalPriceData {
 //   finalPrice: () => Number
 // }
 
 const CartModal = () => {
-  const { cart, modalCloseClick, openModal, removeFromCart } = useProducts();
+  const { cart, modalClose, modalCloseClick, openModal, removeFromCart } =
+    useProducts();
 
   // const finalPrice = cart.reduce((acc, item) => {
   //   let output = acc + Number(item.price)
@@ -19,31 +22,47 @@ const CartModal = () => {
         <ModalContainer onClick={modalCloseClick} id="modalContainer">
           {cart.length === 0 ? (
             <div id="emptyModalDiv">
-              <h1>Não há produtos no carrinho</h1>
+              <div id="cartHeader">
+                <h1>Carrinho de compras</h1>
+                <AiOutlineClose onClick={modalClose} />
+              </div>
+              <div id="emptyCartBody">
+                <h2>Sua sacola está vazia</h2>
+                <span>Adicione itens</span>
+              </div>
             </div>
           ) : (
             <div id="modalDiv">
-              <ul>
+              <div id="cartHeader">
+                <h1>Carrinho de compras</h1>
+                <AiOutlineClose onClick={modalClose} />
+              </div>
+              <ul id="cartList">
                 {cart.map((item, index) => (
                   <li key={index}>
-                    <img src={item.image} alt={item.product} />
-                    <h1>{item.product}</h1>
-                    <div>
-                      <button>-</button>
-                      <h2>counter</h2>
-                      <button>+</button>
+                    <div id="cartImgDiv">
+                      <img src={item.image} alt={item.product} />
                     </div>
-                    <button onClick={() => removeFromCart(item)}>
-                      Remover
-                    </button>
+                    <div id="productstatus">
+                      <h1>{item.product}</h1>
+                      <div id="productCounter">
+                        <button>-</button>
+                        <h2>num</h2>
+                        <button>+</button>
+                      </div>
+                    </div>
+                    <FaTrash onClick={() => removeFromCart(item)} />
                   </li>
                 ))}
               </ul>
-              <div>
-                <p>Total</p>
-                <span>
-                  R$ {cart.reduce((acc, item) => acc + item.price, 0)},00
-                </span>
+              <div id="cartSummary">
+                <div id="cartTotal">
+                  <h2>Total</h2>
+                  <span>
+                    R$ {cart.reduce((acc, item) => acc + item.price, 0)},00
+                  </span>
+                </div>
+                <button>Remover todos</button>
               </div>
             </div>
           )}
