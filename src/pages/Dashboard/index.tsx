@@ -68,7 +68,7 @@ const Dashboard = () => {
           {/* {productList.map((item, index) => ( */}
           {searchFilter.length !== 0 ? (
             searchFilter.map((item, index) => (
-              <li key={index}>
+              <li key={index} tabIndex={0}>
                 <div id="imgDiv">
                   <img src={item.image} alt={item.product} />
                 </div>

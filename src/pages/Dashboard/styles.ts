@@ -60,6 +60,16 @@ export const DashboardContainer = styled.div`
           }
         }
       }
+
+      :focus {
+        border: 2px solid var(--color-primary);
+
+        #ProductDescriptionDiv {
+          button {
+            background-color: var(--color-primary);
+          }
+        }
+      }
     }
   }
 
