@@ -4,10 +4,14 @@ import { useProducts } from "../../Providers/Products";
 import { DashboardContainer } from "./styles";
 import CartModal from "../../Components/CartModal";
 import Header from "../../Components/Header";
+import { Redirect } from "react-router";
+import { useAuth } from "../../Providers/Auth";
 
 const Dashboard = () => {
   const { addToCart, cart, searchFilter, setProducts, setToCart, token } =
     useProducts();
+
+  const { authToken } = useAuth();
 
   useEffect(() => {
     axios
@@ -30,6 +34,10 @@ const Dashboard = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  if (!authToken) {
+    return <Redirect to="/"></Redirect>;
+  }
 
   return (
     <>

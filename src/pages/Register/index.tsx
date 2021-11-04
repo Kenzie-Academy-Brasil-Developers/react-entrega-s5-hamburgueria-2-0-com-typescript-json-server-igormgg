@@ -3,7 +3,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../Providers/Auth";
 import { RegisterContainer } from "./styles";
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { FiShoppingBag } from "react-icons/fi";
 
 interface RegisterData {
@@ -14,7 +14,7 @@ interface RegisterData {
 }
 
 const Register = () => {
-  const { Register } = useAuth();
+  const { authToken, Register } = useAuth();
 
   const history = useHistory();
 
@@ -43,6 +43,10 @@ const Register = () => {
   const onSubmit = (data: RegisterData) => {
     Register(data);
   };
+
+  if (authToken) {
+    return <Redirect to="/dashboard"></Redirect>;
+  }
 
   return (
     <RegisterContainer>

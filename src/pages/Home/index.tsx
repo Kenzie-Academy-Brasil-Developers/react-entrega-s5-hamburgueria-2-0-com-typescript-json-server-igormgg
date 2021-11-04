@@ -3,7 +3,7 @@ import { LoginContainer } from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { FiShoppingBag } from "react-icons/fi";
 
 interface UserData {
@@ -12,7 +12,7 @@ interface UserData {
 }
 
 const Home = () => {
-  const { Signin } = useAuth();
+  const { authToken, Signin } = useAuth();
 
   const history = useHistory();
 
@@ -33,6 +33,10 @@ const Home = () => {
   const onSubmit = (data: UserData) => {
     Signin(data);
   };
+
+  if (authToken) {
+    return <Redirect to="/dashboard"></Redirect>;
+  }
 
   return (
     <LoginContainer>
