@@ -99,7 +99,34 @@ export const HeaderContainer = styled.div`
       display: none;
     }
 
-    #cartSVG,
+    #cartSVGDiv {
+      display: flex;
+
+      #cartSVG {
+        font-size: 22px;
+        color: var(--gray-300);
+        transform: translateX(5px);
+      }
+
+      #cartCounter {
+        width: 20px;
+        height: 24px;
+        background-color: var(--color-primary);
+        border-radius: 7px;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 24px;
+        transform: translateY(-15px);
+      }
+
+      :hover {
+        cursor: pointer;
+        filter: brightness(0.8);
+      }
+    }
+
     #logoutSVG,
     #searchMobile {
       font-size: 22px;

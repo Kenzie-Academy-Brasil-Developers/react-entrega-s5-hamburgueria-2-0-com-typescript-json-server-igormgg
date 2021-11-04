@@ -13,6 +13,7 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
 
   const {
+    cart,
     modalOpenClick,
     searchInput,
     writeSearchInput,
@@ -66,7 +67,10 @@ const Header = () => {
               </div>
             </div>
             <BiSearch id="searchMobile" onClick={mobileSearchClickHandler} />
-            <FaShoppingCart id="cartSVG" onClick={modalOpenClick} />
+            <div id="cartSVGDiv" onClick={modalOpenClick}>
+              <FaShoppingCart id="cartSVG" />
+              <div id="cartCounter">{cart.length}</div>
+            </div>
             <FiLogOut id="logoutSVG" onClick={Signout} />
           </div>
         </div>
