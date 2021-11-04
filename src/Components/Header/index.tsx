@@ -8,18 +8,9 @@ import { useAuth } from "../../Providers/Auth";
 import { toast } from "react-toastify";
 
 const Header = () => {
-  // const [inputText, setInputText] = useState("");
-
   const [showSearch, setShowSearch] = useState(false);
 
-  const {
-    cart,
-    modalOpenClick,
-    searchInput,
-    writeSearchInput,
-    // setProducts,
-    // productList,
-  } = useProducts();
+  const { cart, modalOpenClick, searchInput, writeSearchInput } = useProducts();
 
   const { Signout } = useAuth();
 
@@ -27,20 +18,6 @@ const Header = () => {
     toast.info(`Clique no botão de pesquisa novamente para voltar ao menu.`);
     setShowSearch(true);
   };
-
-  // const filter = productList.filter(
-  //   (element) =>
-  //     element.product.toLowerCase().includes(inputText) ||
-  //     element.category.toLowerCase().includes(inputText)
-  // );
-
-  // const handleSearchClick = () => {
-  //   setProducts(filter);
-  // };
-
-  // const handleSearchClick = () => {
-  //   console.log("Reestruturar");
-  // };
 
   return (
     <HeaderContainer>
@@ -55,9 +32,7 @@ const Header = () => {
           <div id="endBox">
             <div id="searchBox">
               <input
-                // value={inputText}
                 value={searchInput}
-                // onChange={(e) => setInputText(e.target.value)}
                 onChange={(e) => writeSearchInput(e.target.value)}
                 type="text"
                 placeholder="Digitar Pesquisa"
