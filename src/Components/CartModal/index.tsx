@@ -8,13 +8,14 @@ import { FaTrash } from "react-icons/fa";
 // }
 
 const CartModal = () => {
-  const { cart, modalClose, modalCloseClick, openModal, removeFromCart } =
-    useProducts();
-
-  // const finalPrice = cart.reduce((acc, item) => {
-  //   let output = acc + Number(item.price)
-
-  // })
+  const {
+    cart,
+    clearCart,
+    modalClose,
+    modalCloseClick,
+    openModal,
+    removeFromCart,
+  } = useProducts();
 
   return (
     <>
@@ -47,7 +48,7 @@ const CartModal = () => {
                       <h1>{item.product}</h1>
                       <div id="productCounter">
                         <button>-</button>
-                        <h2>num</h2>
+                        <h2>{item.quantity}</h2>
                         <button>+</button>
                       </div>
                     </div>
@@ -59,10 +60,15 @@ const CartModal = () => {
                 <div id="cartTotal">
                   <h2>Total</h2>
                   <span>
-                    R$ {cart.reduce((acc, item) => acc + item.price, 0)},00
+                    R${" "}
+                    {cart.reduce(
+                      (acc, item) => acc + item.price * item.quantity,
+                      0
+                    )}
+                    ,00
                   </span>
                 </div>
-                <button>Remover todos</button>
+                <button onClick={clearCart}>Remover todos</button>
               </div>
             </div>
           )}
