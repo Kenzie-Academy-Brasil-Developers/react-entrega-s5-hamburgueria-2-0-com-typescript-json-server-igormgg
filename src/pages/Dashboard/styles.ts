@@ -70,6 +70,16 @@ export const DashboardContainer = styled.div`
           }
         }
       }
+
+      :hover {
+        border: 2px solid var(--color-primary);
+
+        #ProductDescriptionDiv {
+          button {
+            background-color: var(--color-primary);
+          }
+        }
+      }
     }
   }
 
