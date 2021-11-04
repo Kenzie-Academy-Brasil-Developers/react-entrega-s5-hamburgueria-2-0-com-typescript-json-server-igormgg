@@ -14,6 +14,7 @@ interface ProductsProviderData {
   modalCloseClick: (event: any) => void;
   modalOpenClick: () => void;
   removeFromCart: (product: ProductData) => void;
+  removeOneFromCart: (product: ProductData) => void;
   clearCart: () => void;
   setToCart: (data: ProductData[]) => void;
   setProducts: (item: ProductData[]) => void;
@@ -55,8 +56,25 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
     setProductList(item);
   };
 
+  const removeOneFromCart = (product: ProductData) => {
+    // console.log(token);
+    axios
+      .patch(
+        `https://hamburgueria-kenzie-2-igor.herokuapp.com/cart/${product.id}`,
+        { quantity: product.quantity - 1 },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() =>
+        toast.success(`Um ${product.product} foi removido do carrinho.`)
+      );
+  };
+
   const addToCart = (product: ProductData) => {
-    console.log(token);
+    // console.log(token);
     const newProduct = {
       product: product.product,
       category: product.category,
@@ -69,15 +87,21 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
       (item) => item.product === newProduct.product
     );
     findProduct
-      ? axios.patch(
-          `https://hamburgueria-kenzie-2-igor.herokuapp.com/cart/${findProduct.id}`,
-          { quantity: findProduct.quantity + 1 },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+      ? axios
+          .patch(
+            `https://hamburgueria-kenzie-2-igor.herokuapp.com/cart/${findProduct.id}`,
+            { quantity: findProduct.quantity + 1 },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then(() =>
+            toast.success(
+              `Mais um ${findProduct.product} adicionado ao carrinho.`
+            )
+          )
       : axios
           .post(
             "https://hamburgueria-kenzie-2-igor.herokuapp.com/cart",
@@ -88,9 +112,8 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
               },
             }
           )
-          .then((response) => {
-            toast.success(`Produto adicionado ao carrinho.`);
-            setCart([...cart, response.data]);
+          .then(() => {
+            toast.success(`${newProduct.product} adicionado ao carrinho.`);
           })
           .catch(() =>
             toast.error("O produto não foi adicionado ao carrinho.")
@@ -98,27 +121,32 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
   };
 
   const removeFromCart = (product: ProductData) => {
-    axios.delete(
-      `https://hamburgueria-kenzie-2-igor.herokuapp.com/cart/${product.id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    axios
+      .delete(
+        `https://hamburgueria-kenzie-2-igor.herokuapp.com/cart/${product.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() =>
+        toast.success(`Removido por completo ${product.product} do carrinho.`)
+      );
   };
 
   const clearCart = () => {
     for (let i = 1; i <= 8; i++) {
-      axios
-        .delete(`https://hamburgueria-kenzie-2-igor.herokuapp.com/cart/${i}`, {
+      axios.delete(
+        `https://hamburgueria-kenzie-2-igor.herokuapp.com/cart/${i}`,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        })
-        .then()
-        .catch((err) => console.log(err));
+        }
+      );
     }
+    toast.success(`Todos os produtos foram removidos do carrinho.`);
   };
 
   const searchFilter = productList.filter(
@@ -164,6 +192,7 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
         setProducts,
         searchFilter,
         removeFromCart,
+        removeOneFromCart,
         setToCart,
         token,
         writeSearchInput,

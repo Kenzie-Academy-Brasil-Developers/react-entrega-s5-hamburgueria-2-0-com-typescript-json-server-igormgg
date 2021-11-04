@@ -3,18 +3,16 @@ import { useProducts } from "../../Providers/Products";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaTrash } from "react-icons/fa";
 
-// interface finalPriceData {
-//   finalPrice: () => Number
-// }
-
 const CartModal = () => {
   const {
+    addToCart,
     cart,
     clearCart,
     modalClose,
     modalCloseClick,
     openModal,
     removeFromCart,
+    removeOneFromCart,
   } = useProducts();
 
   return (
@@ -47,9 +45,11 @@ const CartModal = () => {
                     <div id="productstatus">
                       <h1>{item.product}</h1>
                       <div id="productCounter">
-                        <button>-</button>
+                        <button onClick={() => removeOneFromCart(item)}>
+                          -
+                        </button>
                         <h2>{item.quantity}</h2>
-                        <button>+</button>
+                        <button onClick={() => addToCart(item)}>+</button>
                       </div>
                     </div>
                     <FaTrash onClick={() => removeFromCart(item)} />

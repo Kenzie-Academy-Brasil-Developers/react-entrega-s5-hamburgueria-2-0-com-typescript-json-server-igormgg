@@ -5,6 +5,7 @@ import { FiLogOut } from "react-icons/fi";
 import { useState } from "react";
 import { useProducts } from "../../Providers/Products";
 import { useAuth } from "../../Providers/Auth";
+import { toast } from "react-toastify";
 
 const Header = () => {
   // const [inputText, setInputText] = useState("");
@@ -20,6 +21,11 @@ const Header = () => {
   } = useProducts();
 
   const { Signout } = useAuth();
+
+  const mobileSearchClickHandler = () => {
+    toast.info(`Clique no botão de pesquisa novamente para voltar ao menu.`);
+    setShowSearch(true);
+  };
 
   // const filter = productList.filter(
   //   (element) =>
@@ -59,7 +65,7 @@ const Header = () => {
                 <BiSearch />
               </div>
             </div>
-            <BiSearch id="searchMobile" onClick={() => setShowSearch(true)} />
+            <BiSearch id="searchMobile" onClick={mobileSearchClickHandler} />
             <FaShoppingCart id="cartSVG" onClick={modalOpenClick} />
             <FiLogOut id="logoutSVG" onClick={Signout} />
           </div>
