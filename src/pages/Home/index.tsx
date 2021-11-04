@@ -5,7 +5,6 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { FiShoppingBag } from "react-icons/fi";
-// import { useState } from "react";
 
 interface UserData {
   email: string;
@@ -13,8 +12,6 @@ interface UserData {
 }
 
 const Home = () => {
-  // const [emailInputColor, setEmailInputColor] = useState("var(--gray-600)");
-
   const { Signin } = useAuth();
 
   const history = useHistory();
@@ -36,10 +33,6 @@ const Home = () => {
   const onSubmit = (data: UserData) => {
     Signin(data);
   };
-
-  // errors.email === undefined
-  //   ? setEmailInputColor("var(--gray-600)")
-  //   : setEmailInputColor("var(--fb-negative)");
 
   return (
     <LoginContainer>

@@ -57,10 +57,6 @@ export const LoginContainer = styled.div`
         }
       }
 
-      /* #emailInput {
-        border: ${(props) => `2px solid `};
-      } */
-
       label {
         font-size: 12px;
         color: var(--fb-negative);
@@ -168,17 +164,6 @@ export const LoginContainer = styled.div`
       }
     }
   }
-
-  /* @media screen and (max-width: 520px) {
-    form {
-      max-width: 500px;
-      width: 100%;
-    }
-
-    #logoContainer {
-      max-width: 377px;
-    }
-  } */
 
   @media screen and (max-width: 800px) {
     flex-direction: column-reverse;

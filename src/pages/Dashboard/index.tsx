@@ -5,37 +5,9 @@ import { DashboardContainer } from "./styles";
 import CartModal from "../../Components/CartModal";
 import Header from "../../Components/Header";
 
-// interface ProductData {
-//   userId: number;
-//   product: string;
-//   category: string;
-//   price: number;
-//   image: string;
-//   id: number;
-// }
-
-// interface setProductsData {
-//   setProducts: (item: ProductData[]) => void
-// }
-
 const Dashboard = () => {
-  // const [productList, setProductList] = useState<ProductData[]>(
-  //   [] as ProductData[]
-  // );
-
-  const {
-    addToCart,
-    cart,
-    // productList,
-    searchFilter,
-    setProducts,
-    setToCart,
-    token,
-  } = useProducts();
-
-  // const setProducts = (item: ProductData[]) => {
-  //   setProductList(item);
-  // };
+  const { addToCart, cart, searchFilter, setProducts, setToCart, token } =
+    useProducts();
 
   useEffect(() => {
     axios
@@ -65,7 +37,6 @@ const Dashboard = () => {
       <DashboardContainer>
         <CartModal />
         <ul id="productListContainer">
-          {/* {productList.map((item, index) => ( */}
           {searchFilter.length !== 0 ? (
             searchFilter.map((item, index) => (
               <li key={index} tabIndex={0}>

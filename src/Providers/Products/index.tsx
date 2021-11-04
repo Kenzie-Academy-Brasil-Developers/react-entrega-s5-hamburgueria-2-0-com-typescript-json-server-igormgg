@@ -57,7 +57,6 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
   };
 
   const removeOneFromCart = (product: ProductData) => {
-    // console.log(token);
     axios
       .patch(
         `https://hamburgueria-kenzie-2-igor.herokuapp.com/cart/${product.id}`,
@@ -74,7 +73,6 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
   };
 
   const addToCart = (product: ProductData) => {
-    // console.log(token);
     const newProduct = {
       product: product.product,
       category: product.category,
