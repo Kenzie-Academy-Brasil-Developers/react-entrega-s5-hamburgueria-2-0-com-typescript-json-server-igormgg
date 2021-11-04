@@ -134,7 +134,7 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
   };
 
   const clearCart = () => {
-    for (let i = 1; i <= 8; i++) {
+    for (let i = 1; i <= cart.length; i++) {
       axios.delete(
         `https://hamburgueria-kenzie-2-igor.herokuapp.com/cart/${i}`,
         {

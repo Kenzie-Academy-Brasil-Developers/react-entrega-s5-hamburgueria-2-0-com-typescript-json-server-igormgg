@@ -8,7 +8,7 @@ import { Redirect } from "react-router";
 import { useAuth } from "../../Providers/Auth";
 
 const Dashboard = () => {
-  const { addToCart, cart, searchFilter, setProducts, setToCart, token } =
+  const { addToCart, cart, searchFilter, setProducts, setToCart } =
     useProducts();
 
   const { authToken } = useAuth();
@@ -17,7 +17,7 @@ const Dashboard = () => {
     axios
       .get("https://hamburgueria-kenzie-2-igor.herokuapp.com/cart", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${authToken}`,
         },
       })
       .then((response) => {
