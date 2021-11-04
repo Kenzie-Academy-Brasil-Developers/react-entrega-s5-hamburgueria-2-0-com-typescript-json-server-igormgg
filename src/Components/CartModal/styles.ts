@@ -135,15 +135,16 @@ export const ModalContainer = styled.div`
           }
 
           #productCounter {
-            display: flex;
             width: 106.5px;
             height: 34px;
+            display: flex;
 
             h2 {
               width: calc(100% - 60px);
               height: 100%;
               border: 1px solid #f2f2f2;
               text-align: center;
+              line-height: 33px;
             }
 
             button {
