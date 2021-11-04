@@ -131,7 +131,7 @@ export const ProductsProvider = ({ children }: ProductsProps) => {
         }
       )
       .then(() =>
-        toast.success(`Removido por completo ${product.product} do carrinho.`)
+        toast.success(`Removido ${product.product} por completo do carrinho.`)
       );
   };
 
